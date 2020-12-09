@@ -1,0 +1,122 @@
+{
+    "asset" : {
+        "generator" : "Khronos glTF Blender I/O v1.1.46",
+        "version" : "2.0"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "name" : "Scene",
+            "nodes" : [
+                0
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "mesh" : 0,
+            "name" : "Circle.011"
+        }
+    ],
+    "materials" : [
+        {
+            "doubleSided" : true,
+            "emissiveFactor" : [
+                0.847058892250061,
+                0.1764705926179886,
+                0.11372549831867218
+            ],
+            "name" : "Material.015",
+            "pbrMetallicRoughness" : {
+                "baseColorFactor" : [
+                    0.8482955694198608,
+                    0.1772424876689911,
+                    0.11354385316371918,
+                    1
+                ],
+                "metallicFactor" : 0,
+                "roughnessFactor" : 0.7848484516143799
+            }
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "Circle.011",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 0,
+                        "NORMAL" : 1,
+                        "TEXCOORD_0" : 2
+                    },
+                    "indices" : 3,
+                    "material" : 0
+                }
+            ]
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5126,
+            "count" : 24,
+            "max" : [
+                0.09290188550949097,
+                0.10727345943450928,
+                2
+            ],
+            "min" : [
+                -0.09290154278278351,
+                -0.10727354884147644,
+                -1.8587957839599767e-08
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 24,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5126,
+            "count" : 24,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 3,
+            "componentType" : 5123,
+            "count" : 36,
+            "type" : "SCALAR"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 288,
+            "byteOffset" : 0
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 288,
+            "byteOffset" : 288
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 192,
+            "byteOffset" : 576
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 72,
+            "byteOffset" : 768
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 840,
+            "uri" : "data:application/octet-stream;base64,KkO+vS2yW73yx24y/EK+vUSyW70AAABA/EK+vRayWz0AAABAKkO+vS2yWz1Zq58yQrS2NCSy2z0AAABAWEO+PRuyWz0AAABAKkO+PTKyWz3xx26ygx0hsjCy2z2HHaExWEO+PUayW70AAABALr27NDyy270AAABAPk9spjCy272DHaGxKkO+PS+yW71aq5+yPk9spjCy272DHaGxLr27NDyy270AAABA/EK+vUSyW70AAABAKkO+vS2yW73yx24yKkO+vS2yWz1Zq58y/EK+vRayWz0AAABAQrS2NCSy2z0AAABAgx0hsjCy2z2HHaExWEO+PRuyWz0AAABAWEO+PUayW70AAABAKkO+PS+yW71aq5+yKkO+PTKyWz3xx26y//9/vwAAAAD//zc0//9/vwAAAAD//zc0//9/vwAAAAD//zc0//9/vwAAAAD//zc0/f//PtezXT+MvlGz/f//PtezXT+MvlGz/f//PtezXT+MvlGz/f//PtezXT+MvlGzAQAAP9ezXb+M1gS0AQAAP9ezXb+M1gS0AQAAP9ezXb+M1gS0AQAAP9ezXb+M1gS0AgAAv9ezXb+MvlEzAgAAv9ezXb+MvlEzAgAAv9ezXb+MvlEzAgAAv9ezXb+MvlEzAQAAv9ezXT/ZAAY0AQAAv9ezXT/ZAAY0AQAAv9ezXT/ZAAY0AQAAv9ezXT/ZAAY0//9/PwAAAAAAADi0//9/PwAAAAAAADi0//9/PwAAAAAAADi0//9/PwAAAAAAADi0AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAABAAIAAwAAAAIABAAFAAYABAAGAAcACAAJAAoACAAKAAsADAANAA4ADwAMAA4AEAARABIAEwAQABIAFAAVABYAFAAWABcA"
+        }
+    ]
+}

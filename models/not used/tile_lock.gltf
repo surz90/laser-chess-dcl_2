@@ -1,0 +1,128 @@
+{
+    "asset" : {
+        "generator" : "Khronos glTF Blender I/O v1.1.46",
+        "version" : "2.0"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "name" : "Scene",
+            "nodes" : [
+                0
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "mesh" : 0,
+            "name" : "Plane.058",
+            "scale" : [
+                1.096364140510559,
+                1.017366647720337,
+                1.096364140510559
+            ]
+        }
+    ],
+    "materials" : [
+        {
+            "alphaMode" : "BLEND",
+            "doubleSided" : true,
+            "emissiveFactor" : [
+                0,
+                0,
+                0
+            ],
+            "name" : "Material.013",
+            "pbrMetallicRoughness" : {
+                "baseColorFactor" : [
+                    0.15294118225574493,
+                    0.26274511218070984,
+                    0.6470588445663452,
+                    0.30000001192092896
+                ],
+                "metallicFactor" : 0,
+                "roughnessFactor" : 0.4909090995788574
+            }
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "Plane.061",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 0,
+                        "NORMAL" : 1,
+                        "TEXCOORD_0" : 2
+                    },
+                    "indices" : 3,
+                    "material" : 0
+                }
+            ]
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5126,
+            "count" : 64,
+            "max" : [
+                0.8542469143867493,
+                2.850497245788574,
+                0.8542460203170776
+            ],
+            "min" : [
+                -0.8542459607124329,
+                0.23786818981170654,
+                -0.8542467355728149
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 64,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5126,
+            "count" : 64,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 3,
+            "componentType" : 5123,
+            "count" : 96,
+            "type" : "SCALAR"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 768,
+            "byteOffset" : 0
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 768,
+            "byteOffset" : 768
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 512,
+            "byteOffset" : 1536
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 192,
+            "byteOffset" : 2048
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 2240,
+            "uri" : "data:application/octet-stream;base64,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"
+        }
+    ]
+}

@@ -1,0 +1,122 @@
+{
+    "asset" : {
+        "generator" : "Khronos glTF Blender I/O v1.1.46",
+        "version" : "2.0"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "name" : "Scene",
+            "nodes" : [
+                0
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "mesh" : 0,
+            "name" : "Circle.010"
+        }
+    ],
+    "materials" : [
+        {
+            "doubleSided" : true,
+            "emissiveFactor" : [
+                0.035079434514045715,
+                0.3828462064266205,
+                0.39646244049072266
+            ],
+            "name" : "Material.008",
+            "pbrMetallicRoughness" : {
+                "baseColorFactor" : [
+                    0.020635517314076424,
+                    0.15468434989452362,
+                    0.17141860723495483,
+                    1
+                ],
+                "metallicFactor" : 0,
+                "roughnessFactor" : 0.4939393997192383
+            }
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "Circle.010",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 0,
+                        "NORMAL" : 1,
+                        "TEXCOORD_0" : 2
+                    },
+                    "indices" : 3,
+                    "material" : 0
+                }
+            ]
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5126,
+            "count" : 24,
+            "max" : [
+                0.09290154278278351,
+                0.10727345943450928,
+                2
+            ],
+            "min" : [
+                -0.09290154278278351,
+                -0.10727354884147644,
+                -4.6890717975145435e-09
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 24,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5126,
+            "count" : 24,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 3,
+            "componentType" : 5123,
+            "count" : 36,
+            "type" : "SCALAR"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 288,
+            "byteOffset" : 0
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 288,
+            "byteOffset" : 288
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 192,
+            "byteOffset" : 576
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 72,
+            "byteOffset" : 768
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 840,
+            "uri" : "data:application/octet-stream;base64,KkO+vS2yW72BHSGxKkO+vUSyW70AAABAKkO+vRayWz0AAABAKkO+vS2yWz2BHSExgx0hsiSy2z0AAABAKkO+PRuyWz0AAABAKkO+PTKyWz2FHSExgx0hsjCy2z2DHaExKkO+PUayW70AAABAAAAAADyy270AAABAAAAAADCy272DHaGxKkO+PS+yW72CHSGxAAAAADCy272DHaGxAAAAADyy270AAABAKkO+vUSyW70AAABAKkO+vS2yW72BHSGxKkO+vS2yWz2BHSExKkO+vRayWz0AAABAgx0hsiSy2z0AAABAgx0hsjCy2z2DHaExKkO+PRuyWz0AAABAKkO+PUayW70AAABAKkO+PS+yW72CHSGxKkO+PTKyWz2FHSEx//9/vwAAAAAAAACA//9/vwAAAAAAAACA//9/vwAAAAAAAACA//9/vwAAAAAAAACA/f//PtizXT9tIiMz/f//PtizXT9tIiMz/f//PtizXT9tIiMz/f//PtizXT9tIiMzAQAAP9ezXb9tIiOzAQAAP9ezXb9tIiOzAQAAP9ezXb9tIiOzAQAAP9ezXb9tIiOzAgAAv9ezXb9tIiOzAgAAv9ezXb9tIiOzAgAAv9ezXb9tIiOzAgAAv9ezXb9tIiOzAQAAv9azXT9tIiMzAQAAv9azXT9tIiMzAQAAv9azXT9tIiMzAQAAv9azXT9tIiMz//9/PwAAAAAAAAAA//9/PwAAAAAAAAAA//9/PwAAAAAAAAAA//9/PwAAAAAAAAAAAAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAABAAIAAwAAAAIABAAFAAYABAAGAAcACAAJAAoACAAKAAsADAANAA4ADwAMAA4AEAARABIAEwAQABIAFAAVABYAFAAWABcA"
+        }
+    ]
+}
