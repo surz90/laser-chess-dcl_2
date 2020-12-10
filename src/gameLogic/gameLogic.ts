@@ -5,13 +5,12 @@ import { GamePos, GameRotation } from "../khet/gameTypes"
 import { MovementSystem } from "./gameMovement"
 import { BoardView } from "../board/boardView"
 import { userData } from "../gameData/userData"
-
-import { movePlayerTo } from '@decentraland/RestrictedActions'
 import utils from "../../node_modules/decentraland-ecs-utils/index"
 
 import { GameUI } from "../UI/gameUI"
 import { WSSHandler, ClientMethod } from "../serverEvent/websocketHandler"
 import soundResources from "../resources/soundResources"
+
 //import { movePlayerTo } from '@decentraland/RestrictedActions'
 
 

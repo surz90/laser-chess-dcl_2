@@ -2,16 +2,13 @@ import modelResources from "./resources/modelResources"
 import { gameData } from "./gameData/gameData"
 import { userData } from "./gameData/userData"
 import { PlayerStatus, GameMode, GameTheme } from "./gameTypes"
-
 import { GameColor } from "./khet/gameTypes"
 import utils from "../node_modules/decentraland-ecs-utils/index"
-
 import { WSSHandler, ClientMethod } from "./serverEvent/websocketHandler"
 import { themeData } from "./gameData/themeData"
 import soundResources from "./resources/soundResources"
 
 export class PlayerMatching {
-
     //wssHandler: WSSSocketHandler
     UIEvents: EventManager
 
@@ -30,8 +27,7 @@ export class PlayerMatching {
 
     inGameStatusState: PlayerStatus
 
-    constructor(UIEvents: EventManager) {//wssHandler: WSSSocketHandler, UIEvents: EventManager) {
-        //this.wssHandler = wssHandler
+    constructor(UIEvents: EventManager) {
         this.UIEvents = UIEvents
 
         this._setModel(modelResources.FREE_1)
@@ -48,7 +44,6 @@ export class PlayerMatching {
         this.redArrow.addComponentOrReplace(themeResource.sceneModel.arrow_red)
     }
     _loadingModel() {
-        //this.scenePivot = new Entity()
         this.scenePivot.addComponent(new Transform({
             position: new Vector3(16, 0, 16)
         }))
@@ -78,7 +73,6 @@ export class PlayerMatching {
                                 color: GameColor.SILVER
                             }
                         }
-                        //this.wssHandler.sendMsg(playerJoinMsg)
                         WSSHandler.sendMsg(playerJoinMsg)
                     }
                 }
@@ -118,19 +112,16 @@ export class PlayerMatching {
                                 color: GameColor.RED
                             }
                         }
-                        //this.wssHandler.sendMsg(playerJoinMsg)
                         WSSHandler.sendMsg(playerJoinMsg)
                     }
                 }
             },
             () => {
-                //if (gameData.getMode() === GameMode.MULTIPLAYER) {
                 if (gameData.getPlayer().RED === userData.getUserName()
                     && gameData.getPlayer().SILVER === null) {
                         log('RED PLAYER: CANCEL')
                         this.cancelJoin()
                     }
-                //}
             },
             false
         ))
@@ -157,7 +148,6 @@ export class PlayerMatching {
             method: ClientMethod.CANCELJOIN,
             data: {}
         }
-        //this.wssHandler.sendMsg(cancelJoinMsg)
         WSSHandler.sendMsg(cancelJoinMsg)
     }
     
@@ -193,7 +183,6 @@ export class PlayerMatching {
 
 
     update(dt: number) {
-        //if (this.wssHandler.socket !== undefined && this.wssHandler.socket.readyState === WebSocket.OPEN) {
         if (WSSHandler.getReadyState() === WebSocket.OPEN) {
             if (gameData.getMode() === GameMode.MULTIPLAYER) {
                 if (gameData.getPlayer().RED === null) {

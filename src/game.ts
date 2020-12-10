@@ -21,21 +21,17 @@ const ID = '2'
 soundResources.music.setVolume(0.5)
 soundResources.music.getComponent(AudioSource).playing = true
 
-//wss url
-//const wssUrl = 'wss://localhost'
+//const wssUrl = 'ws://localhost:8080'
 const wssUrl = 'wss://155-138-227-54.nip.io/broadcast'
 
 //LOADING BASE SCENE
-
 const centerScene = new Vector3(16, 0, 16)
-
 const baseScene = new Entity()
 baseScene.addComponentOrReplace(modelResources.FREE_1.sceneModel.base_scene)
 baseScene.addComponent(new Transform({
     position: centerScene
 }))
 engine.addEntity(baseScene)
-
 
 //FETCH USER INFORMATION
 const FetchuserInformation = (async () => {
@@ -52,15 +48,23 @@ const FetchuserInformation = (async () => {
     userData.setUserRealm(realm.displayName + ID)
 })
 
+
+
+
+
+const UIEVents = new EventManager()
+const gameUI = new GameUI(UIEVents)
+
+gameUI.UIObjects.serverNotif.setNotif('LOADING SCENE\nPLEASE WAIT', 30)
+gameUI.UIObjects.loadingUI.showLoading()
+
+
 const delayStart = new Entity()
 engine.addEntity(delayStart)
-
-delayStart.addComponent(new utils.Delay(5000, () => {
+delayStart.addComponent(new utils.Delay(10000, () => {
     FetchuserInformation()
         .then(() => {
             log('fetch success')
-            const UIEVents = new EventManager()
-            const gameUI = new GameUI(UIEVents)
 
             const boardView = new BoardView()
             const gameLogic = new GameLogic(gameUI, boardView)
@@ -69,15 +73,11 @@ delayStart.addComponent(new utils.Delay(5000, () => {
             WSSHandler.init(wssUrl, gameUI, gameLogic)
 
             const gameController = new GameController(gameUI, UIEVents, boardView, gameLogic, gameTutorial)
-
             const playerMatching = new PlayerMatching(UIEVents)
-
             const resourceController = new ResourceController(baseScene, playerMatching, gameLogic)
-        
             const uiEventReceiver = new UIEVentReceiver(gameUI, gameLogic, gameTutorial, playerMatching, UIEVents, resourceController, gameController)
 
-            gameUI.UIObjects.serverNotif.setNotif('LOADING SCENE\nPLEASE WAIT', 30)
-            gameUI.UIObjects.loadingUI.showLoading()
+            engine.addSystem(new wssControl())
         })
         .catch((err) => {
             log('fetch data failed', err)
@@ -87,26 +87,46 @@ delayStart.addComponent(new utils.Delay(5000, () => {
 
 const camera = Camera.instance
 
-/*
+
 class wssControl {
+    readystate = null
+    userInScene: boolean
+
     constructor() {
+        this.userInScene= isInScene()
     }
     update(dt: number) {
+        let inScene = isInScene()
+
+        if (this.readystate !== WSSHandler.getReadyState()) {
+            log('websocket state change: ', this.readystate, WSSHandler.getReadyState())
+            this.readystate = WSSHandler.getReadyState()
+        }
+
         if (!isInScene()) {
             //if user outside the scene and websocket not initiating any connection
-            if (WSSHandler.getReadyState() === WebSocket.OPEN && WSSHandler.isInit() === false) {
-                WSSHandler.getSocket().close()
+            //terminate wss connection
+            if ((WSSHandler.getReadyState() === WebSocket.OPEN || WSSHandler.getReadyState() === WebSocket.CONNECTING)
+                && WSSHandler.isInit() === false) {
+                WSSHandler.closeWs()
             }
         }
-        else {
-            //if user inside the scene and webscoket in closed state but not yet initiating connection
-            if (WSSHandler.getReadyState() === WebSocket.CLOSED && WSSHandler.isInit() === false) {
-                WSSHandler.connect(wssUrl)
+
+        if (this.userInScene === false && inScene === true) {
+            log('user enter')
+            if ((WSSHandler.getReadyState() !== WebSocket.OPEN || WSSHandler.getReadyState() !== WebSocket.CONNECTING)
+                && WSSHandler.isInit() === false) {
+                WSSHandler.connectWs(wssUrl)
             }
         }
+
+        if (this.userInScene === true && inScene === false) {
+            log('user exit')
+        }
+        this.userInScene = inScene
     }
 }
-engine.addSystem(new wssControl())
+
 export function isInScene() {
     if (camera.position.x > 32 || camera.position.x < 0 ||
         camera.position.z > 32 || camera.position.z < 0) {
@@ -114,4 +134,3 @@ export function isInScene() {
     }
     else return true
 }
-*/

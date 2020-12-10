@@ -1,14 +1,11 @@
 import { userData } from "../gameData/userData"
 import { gameData } from "../gameData/gameData"
 import { GameColor, GameMode, GameTheme } from "../gameTypes"
-import { movePlayerTo } from '@decentraland/RestrictedActions'
-
 import { GameLogic } from "../gameLogic/gameLogic"
-
-import utils from "../../node_modules/decentraland-ecs-utils/index"
 import { GameUI } from "../UI/gameUI"
 import { themeData } from "../gameData/themeData"
 import { ChangeThemeEvent } from "../UI/UIEventReceiver"
+//import { movePlayerTo } from '@decentraland/RestrictedActions'
 
 
 export const WSSHandler = (function () {
@@ -17,34 +14,31 @@ export const WSSHandler = (function () {
     //let UIEvents: EventManager
     let gameUI: GameUI
     let gameLogic: GameLogic
-
-    let readyState: any
     
-    function openSocket(wssurl) {
+    function _initSocket(wssurl) {
         return new Promise((resolve, reject) => {
 
             socket = new WebSocket(wssurl)
 
             socket.onopen = (res) => {
                 log('wss OK')
-                readyState = socket.readyState
-                resolve(socket.readyState)
                 gameUI.UIObjects.gameInfoUI.setServerStatus('OPENING CONNECTION TO SERVER', Color4.Yellow())
+
+                resolve(socket.readyState)
             }
 
             socket.onerror = (res) => {
                 log('wss ERR ')
-                readyState = socket.readyState
-                reject(socket.readyState)
-
                 gameUI.UIObjects.gameInfoUI.setServerStatus('CONNECTION TO SERVER: FAILED', Color4.Red())
+
+                reject(socket.readyState)
             }
 
             socket.onclose = (res) => {
                 log('wss CLOSED')
-                readyState = socket.readyState
-
                 gameUI.UIObjects.gameInfoUI.setServerStatus('CONNECTION TO SERVER: FAILED', Color4.Red())
+
+                reject(socket.readyState)
             }
 
             socket.onmessage = (event) => {
@@ -103,27 +97,6 @@ export const WSSHandler = (function () {
                 //this.UIEvents.fireEvent(new NotifMessageEvent(true, data.text))
                 break
 
-            /*
-            case ServerMethod.UPDTHEME:
-                let theme3avail = data.theme % 2
-                let theme4avail = Math.floor(data.theme / 2)
-
-                if (theme3avail === 1) themeData.addAvailableTheme(GameTheme.THEME3)
-                if (theme4avail === 1) themeData.addAvailableTheme(GameTheme.THEME4)
-
-                log(themeData.getAvailableTheme())
-                break
-
-            case ServerMethod.UPD_CH_THEME:
-                if (data.theme % 2) themeData.addAvailableTheme(GameTheme.THEME3)
-                if (Math.floor(data.theme / 2)) themeData.addAvailableTheme(GameTheme.THEME4)
-
-                if (data.change === 1) gameUI.UIEvents.fireEvent(new ChangeThemeEvent(GameTheme.THEME3))
-                if (data.change === 2) gameUI.UIEvents.fireEvent(new ChangeThemeEvent(GameTheme.THEME4))
-
-                break
-                */
-
             case ServerMethod.UPDPLAYER:
                 if (gameData.getMode() === GameMode.MULTIPLAYER) {
 
@@ -149,10 +122,10 @@ export const WSSHandler = (function () {
                     }
 
                     if (players.RED !== null && players.SILVER !== null) {
-                        if (players.RED === userData.getUserName()) {
+                        if (players.RED === userData.getUserName() && Camera.instance.position.y < 10) {
                             movePlayerTo(new Vector3(16, 15, 28))//, new Vector3(16, 0, 16))
                         }
-                        else if (players.SILVER === userData.getUserName()) {
+                        else if (players.SILVER === userData.getUserName() && Camera.instance.position.y < 10) {
                             movePlayerTo(new Vector3(16, 15, 4))//, new Vector3(16, 0, 16))
                         }
                     }
@@ -223,6 +196,27 @@ export const WSSHandler = (function () {
                     gameLogic.gameRestart()
                 }
                 break
+
+        /*
+        case ServerMethod.UPDTHEME:
+            let theme3avail = data.theme % 2
+            let theme4avail = Math.floor(data.theme / 2)
+
+            if (theme3avail === 1) themeData.addAvailableTheme(GameTheme.THEME3)
+            if (theme4avail === 1) themeData.addAvailableTheme(GameTheme.THEME4)
+
+            log(themeData.getAvailableTheme())
+            break
+
+        case ServerMethod.UPD_CH_THEME:
+            if (data.theme % 2) themeData.addAvailableTheme(GameTheme.THEME3)
+            if (Math.floor(data.theme / 2)) themeData.addAvailableTheme(GameTheme.THEME4)
+
+            if (data.change === 1) gameUI.UIEvents.fireEvent(new ChangeThemeEvent(GameTheme.THEME3))
+            if (data.change === 2) gameUI.UIEvents.fireEvent(new ChangeThemeEvent(GameTheme.THEME4))
+
+            break
+            */
         }
     }
 
@@ -230,57 +224,43 @@ export const WSSHandler = (function () {
         socket.send(JSON.stringify(_msg))
     }
     
-    function wsConnect(_wssurl) {
+    function connect(_wssurl) {
         isInit = true
         gameUI.UIObjects.gameInfoUI.setServerStatus('CONNECTING TO SERVER', Color4.Yellow())
 
-        //if (isInScene()) {
-            gameUI.UIObjects.serverNotif.setNotif('LOADING SCENE\nPLEASE WAIT', 30)
-            gameUI.UIObjects.loadingUI.showLoading()
-
-            let delayStart = new Entity()
-
-            delayStart.addComponent(new utils.Delay(10000, () => {
-                openSocket(_wssurl)
-                    .then(() => {
-                        log("websocket connection OK ")
-                    })
-                    .then(() => {
-                        gameUI.UIObjects.serverNotif.unsetNotif()
-                        gameUI.UIObjects.loadingUI.hideLoading()
-                    })
-                    .catch((err) => {
-                        log("can't connect to websocket ", err)
-                        gameUI.UIObjects.serverNotif.unsetNotif()
-                        gameUI.UIObjects.loadingUI.hideLoading()
-                    })
-
+        _initSocket(_wssurl)
+            .then(() => {
+                log("websocket connection OK ")
+                gameUI.UIObjects.serverNotif.unsetNotif()
+                gameUI.UIObjects.loadingUI.hideLoading()
                 isInit = false
-                engine.removeEntity(delayStart)
-            }))
-
-            engine.addEntity(delayStart)
-        //}
-        //else {
-            //do nothing
-        //}
+            })
+            .catch((err) => {
+                log("can't connect to websocket ", err)
+                gameUI.UIObjects.serverNotif.unsetNotif()
+                gameUI.UIObjects.loadingUI.hideLoading()
+                isInit = false
+            })
     }
     
 
     return {
+        init(_wssUrl, _gameUI: GameUI, _gameLogic: GameLogic) {
+            gameUI = _gameUI
+            gameLogic = _gameLogic
+            connect(_wssUrl)
+        },
+        connectWs(_wssurl) {
+            log('connecting to: ', _wssurl)
+            connect(_wssurl)
+        },
+        closeWs() {
+            log('client closing websocket connection')
+            socket.close()
+        },
         getSocket() {
             return socket
         },
-        init(_wssurl: string, _gameUI: GameUI, _gameLogic: GameLogic) {
-            gameUI = _gameUI
-            gameLogic = _gameLogic
-
-            wsConnect(_wssurl)
-        },
-        connect(_wssurl: string) {
-            wsConnect(_wssurl)
-        },
-
         isInit() {
             return isInit
         },
@@ -290,7 +270,7 @@ export const WSSHandler = (function () {
         },
 
         getReadyState() {
-            return readyState
+            return socket.readyState
         }
     }
 })()
